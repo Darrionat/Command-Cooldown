@@ -99,6 +99,8 @@ public class CommandProcess implements Listener {
 	private double changeCooldownByPermission(Command command, Player p, double duration) {
 		// Has permission with different cooldown
 		for (PermissionAttachmentInfo permissionAttachmentInfo : p.getEffectivePermissions()) {
+			if (!permissionAttachmentInfo.getValue()) continue;
+
 			String permission = permissionAttachmentInfo.getPermission();
 			String key = command.message.replace(" ", "_");
 			if (!permission.contains("commandcooldown." + key)) {
