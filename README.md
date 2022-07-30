@@ -1,4 +1,4 @@
-# Command Cooldown 1.7-1.17
+# Command Cooldown 1.7-1.19
 
 Created by [Darrion][Darrionat], CommandCooldown is a Spigot plugin is capable of adding cooldowns to any command. Originally published in December 2019,
 CommandCooldown has gone through a multitude of changes to end where it is.
