@@ -5,6 +5,7 @@ import me.darrionat.commandcooldown.cooldowns.Cooldown;
 import me.darrionat.commandcooldown.prompts.ChatPrompt;
 import me.darrionat.commandcooldown.prompts.DurationTask;
 import me.darrionat.commandcooldown.prompts.Prompt;
+import me.darrionat.commandcooldown.utils.Duration;
 import me.darrionat.pluginlib.guis.Gui;
 import me.darrionat.shaded.xseries.XMaterial;
 import org.bukkit.entity.Player;
@@ -27,10 +28,17 @@ public class CooldownEditorGui extends Gui {
     @Override
     protected void getContents(Player p) {
         double duration = cooldown.getDuration();
-        createItem(CHANGE_COOLDOWN_MATERIAL, 1, CHANGE_COOLDOWN_SLOT, "&eChange Cooldown",
-                "&7Current Duration: &a" + duration + "&7(s)");
+        String durationString = Duration.toDurationString(duration);
+        createItem(CHANGE_COOLDOWN_MATERIAL,
+                1,
+                CHANGE_COOLDOWN_SLOT,
+                "&eChange Cooldown",
+                "&7Current Duration: &a" + durationString);
         // Go back item
-        createItem(CooldownsGui.PAGE_SWITCH, 1, CommandEditorGui.BACK_MENU_SLOT, "&7Go Back");
+        createItem(CooldownsGui.PAGE_SWITCH,
+                1,
+                CommandEditorGui.BACK_MENU_SLOT,
+                "&7Go Back");
     }
 
     @Override

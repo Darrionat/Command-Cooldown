@@ -7,6 +7,7 @@ import me.darrionat.commandcooldown.interfaces.ICommandService;
 import me.darrionat.commandcooldown.prompts.ChatPrompt;
 import me.darrionat.commandcooldown.prompts.CreateCooldownTask;
 import me.darrionat.commandcooldown.prompts.Prompt;
+import me.darrionat.commandcooldown.utils.Duration;
 import me.darrionat.pluginlib.guis.Gui;
 import me.darrionat.shaded.xseries.XMaterial;
 import org.bukkit.entity.Player;
@@ -43,9 +44,9 @@ public class CommandEditorGui extends Gui {
     protected void getContents(Player p) {
         Cooldown base = command.getBaseCooldown();
         if (command.hasBaseCooldown()) {
-            double duration = base.getDuration();
+            String durationString = Duration.toDurationString(base.getDuration());
             createItem(BASE_COOLDOWN_MATERIAL, 1, BASE_COOLDOWN_SLOT, "&eBase Cooldown &7*",
-                    "&7Duration: &a" + duration + "s",
+                    "&7Duration: &a" + durationString,
                     "&7Left-Click to &aedit &7cooldown");
         } else {
             createItem(NO_BASE_COOLDOWN_MATERIAL, 1, 0,
@@ -58,10 +59,10 @@ public class CommandEditorGui extends Gui {
         for (int i = 1; i < AMT_PER_PAGE && i + pageDiff < cooldowns.size(); i++) {
             Cooldown cooldown = cooldowns.get(i);
             if (cooldown.equals(base)) continue;
-            double duration = cooldown.getDuration();
+            String durationString = Duration.toDurationString(cooldown.getDuration());
             createItem(COOLDOWN, 1, i,
                     "&e" + String.join(" ", cooldown.getArgs()),
-                    "&7Duration: &a" + duration + "s",
+                    "&7Duration: &a" + durationString,
                     "&7Left-Click to &aedit &7cooldown",
                     "&7Right-Click to &cdelete &7cooldown");
         }

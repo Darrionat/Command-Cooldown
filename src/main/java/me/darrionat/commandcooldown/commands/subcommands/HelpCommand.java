@@ -43,7 +43,7 @@ public class HelpCommand extends SubCommand {
     private void sendHelpMessage(CommandSender sender, String pageInput) {
         int page;
         List<String> list = messageService.getHelpMessages();
-        int pagesAmount = (list.size() * 5 - 1) / 5;
+        int pagesAmount = (int) Math.ceil((double) list.size() / 5.0);
         try {
             page = Integer.parseInt(pageInput);
         } catch (NumberFormatException e) {

@@ -60,6 +60,6 @@ public class Duration {
             builder.append(m).append("m").append(" ");
         if (s >= 1)
             builder.append(s).append("s");
-        return builder.toString();
+        return builder.toString().trim();
     }
 }

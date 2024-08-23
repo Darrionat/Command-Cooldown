@@ -63,7 +63,7 @@ public class CooldownsRepository implements ICooldownsRepository {
         ConfigurationSection section = file.getConfigurationSection(label);
         // Add cooldowns to the section
         for (Cooldown cooldown : command.getCooldowns()) {
-            String args = String.join("", cooldown.getArgs());
+            String args = String.join(" ", cooldown.getArgs());
             section.set("cooldowns." + args, cooldown.getDuration());
         }
         // Add the aliases

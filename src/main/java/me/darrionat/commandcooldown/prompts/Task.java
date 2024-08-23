@@ -26,7 +26,7 @@ public abstract class Task {
      * Executed once the prompt is completed.
      *
      * @return The inventory that is opened when the task is finished.
-     * @throws IllegalStateException thrown when the task is ran when not completed.
+     * @throws IllegalStateException thrown when the task is run when not completed.
      * @see #complete()
      */
     public abstract Inventory run() throws IllegalStateException;

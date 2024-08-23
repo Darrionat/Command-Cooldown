@@ -2,6 +2,7 @@ package me.darrionat.commandcooldown;
 
 import me.darrionat.commandcooldown.commands.CommandCooldownCommand;
 import me.darrionat.commandcooldown.cooldowns.Cooldown;
+import me.darrionat.commandcooldown.cooldowns.PlayerCooldown;
 import me.darrionat.commandcooldown.cooldowns.SavedCommand;
 import me.darrionat.commandcooldown.gui.AliasesEditorGui;
 import me.darrionat.commandcooldown.gui.CommandEditorGui;
@@ -19,6 +20,7 @@ import me.darrionat.pluginlib.utils.SpigotMCUpdateHandler;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CommandCooldownPlugin extends Plugin {
     private static final int RESOURCE_ID = 73696;
@@ -28,6 +30,7 @@ public class CommandCooldownPlugin extends Plugin {
     private Errors errors;
     private ICooldownsRepository cooldownsRepo;
     private IConfigRepository configRepo;
+    private IPlayerCooldownsRepository playerCooldownsRepo;
 
     private IBypassService bypassService;
     private ICooldownService cooldownService;
@@ -39,11 +42,9 @@ public class CommandCooldownPlugin extends Plugin {
         initFields();
         if (configRepo.checkForUpdates())
             checkUpdates();
-        // Load saved cooldowns
-        cooldownService.loadAllCooldowns();
 
-        new CommandCooldownCommand(this, messageService, bypassService);
-        new PlayerCommandPreprocess(this, configRepo, cooldownService, bypassService, messageService);
+        new CommandCooldownCommand(this, messageService, bypassService, playerCooldownsRepo);
+        new PlayerCommandPreprocess(this, configRepo, playerCooldownsRepo, cooldownService, bypassService, messageService);
         new PlayerJoin(this, configRepo);
         new ChatPromptListener(this);
     }
@@ -52,6 +53,7 @@ public class CommandCooldownPlugin extends Plugin {
         Bootstrapper bootstrapper = Bootstrapper.getBootstrapper();
         cooldownsRepo = bootstrapper.getCooldownsRepo();
         configRepo = bootstrapper.getConfigRepo();
+        playerCooldownsRepo = bootstrapper.getPlayerCooldownsRepo();
 
         bypassService = bootstrapper.getBypassService();
         cooldownService = bootstrapper.getCooldownService();
@@ -85,7 +87,6 @@ public class CommandCooldownPlugin extends Plugin {
 
     @Override
     public void onDisable() {
-        cooldownService.saveAllCooldowns();
     }
 
     public boolean updateAvailable() {
@@ -154,16 +155,20 @@ public class CommandCooldownPlugin extends Plugin {
         cooldownsRepo.addCommandCooldown(command);
     }
 
-    /**
-     * Resets all cooldowns for a specific player.
-     *
-     * @param target The player
-     */
-    public void removePlayerCooldowns(Player target) {
-        cooldownService.removePlayerCooldowns(target);
-    }
-
     public ICommandService getCommandService() {
         return Bootstrapper.getBootstrapper().getCommandService();
+    }
+
+    public PlayerCooldown matchCooldownToPlayerCooldown(UUID uuid, Cooldown cooldown) {
+        for (PlayerCooldown playerCooldown : playerCooldownsRepo.getAllPlayerCooldownsForPlayer(uuid)) {
+            if (playerCooldown == null) {
+                getErrorHandler().parsePlayerCooldownError(uuid);
+                continue;
+            }
+            Cooldown cd = playerCooldown.getCooldown();
+            if (playerCooldown.getPlayer().equals(uuid) && cd.equals(cooldown))
+                return playerCooldown;
+        }
+        return null;
     }
 }

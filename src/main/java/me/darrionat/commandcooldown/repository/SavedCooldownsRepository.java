@@ -1,9 +1,7 @@
 package me.darrionat.commandcooldown.repository;
 
 import me.darrionat.commandcooldown.CommandCooldownPlugin;
-import me.darrionat.commandcooldown.cooldowns.Cooldown;
 import me.darrionat.commandcooldown.cooldowns.PlayerCooldown;
-import me.darrionat.commandcooldown.cooldowns.SavedCommand;
 import me.darrionat.commandcooldown.interfaces.ISavedCooldownsRepository;
 import me.darrionat.pluginlib.files.Config;
 import me.darrionat.pluginlib.files.ConfigBuilder;
@@ -59,20 +57,11 @@ public class SavedCooldownsRepository implements ISavedCooldownsRepository {
         // pc.toString() = uuid/warp/home 2/3456789
         HashSet<PlayerCooldown> toReturn = new HashSet<>();
         for (String pc : file.getStringList(LIST_NAME)) {
-            String[] arr = pc.split(PlayerCooldown.SEP);
-            if (arr.length != 5) {
+            PlayerCooldown playerCd = PlayerCooldown.parsePlayerCooldown(pc);
+            if (playerCd == null) {
                 plugin.getErrorHandler().loadingSavedCooldownsError();
                 continue;
             }
-            UUID uuid = UUID.fromString(arr[0]);
-            String label = arr[1];
-            String argsStr = arr[2];
-            double duration = Double.parseDouble(arr[3]);
-            long end = Long.parseLong(arr[4]);
-
-            SavedCommand command = new SavedCommand(label);
-            Cooldown cooldown = new Cooldown(command, argsStr, duration);
-            PlayerCooldown playerCd = new PlayerCooldown(uuid, cooldown, end);
             if (!playerCd.expired())
                 toReturn.add(playerCd);
         }

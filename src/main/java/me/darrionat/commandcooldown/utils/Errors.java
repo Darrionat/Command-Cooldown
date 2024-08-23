@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import me.darrionat.pluginlib.ErrorHandler;
 import me.darrionat.pluginlib.commands.SubCommand;
 
+import java.util.UUID;
+
 public class Errors implements ErrorHandler {
     private final CommandCooldownPlugin plugin;
     private final IMessageService messageService;
@@ -31,5 +33,9 @@ public class Errors implements ErrorHandler {
 
     public void loadingSavedCooldownsError() {
         plugin.log("&cError: Internal error when loading saved cooldowns, report this bug promptly.");
+    }
+
+    public void parsePlayerCooldownError(UUID uuid) {
+        plugin.log("&cError: Internal error when parsing player cooldown for " + uuid + ", report this bug promptly.");
     }
 }

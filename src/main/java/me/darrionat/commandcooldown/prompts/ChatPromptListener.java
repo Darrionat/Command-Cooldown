@@ -67,6 +67,7 @@ public class ChatPromptListener implements Listener {
             p.sendMessage(Utils.toColor(task.onFail()));
             return;
         }
+        e.setCancelled(true);
         if (task.complete()) {
             Bukkit.getScheduler().runTask(plugin, () -> p.openInventory(task.run()));
             ACTIVE_TASKS.remove(task);

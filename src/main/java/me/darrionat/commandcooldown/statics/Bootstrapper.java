@@ -2,10 +2,7 @@ package me.darrionat.commandcooldown.statics;
 
 import me.darrionat.commandcooldown.CommandCooldownPlugin;
 import me.darrionat.commandcooldown.interfaces.*;
-import me.darrionat.commandcooldown.repository.ConfigRepository;
-import me.darrionat.commandcooldown.repository.CooldownsRepository;
-import me.darrionat.commandcooldown.repository.MessageRepository;
-import me.darrionat.commandcooldown.repository.SavedCooldownsRepository;
+import me.darrionat.commandcooldown.repository.*;
 import me.darrionat.commandcooldown.services.BypassService;
 import me.darrionat.commandcooldown.services.CommandService;
 import me.darrionat.commandcooldown.services.CooldownService;
@@ -21,6 +18,7 @@ public class Bootstrapper {
     private ICooldownsRepository cooldownsRepo;
     private IMessageRepository messageRepo;
     private ISavedCooldownsRepository savedCooldownsRepo;
+    private IPlayerCooldownsRepository playerCooldownsRepo;
 
     private IBypassService bypassService;
     private ICommandService commandService;
@@ -37,6 +35,11 @@ public class Bootstrapper {
 
     public void init(CommandCooldownPlugin plugin) {
         configRepo = new ConfigRepository(plugin);
+        if (configRepo.databaseEnabled()) {
+            playerCooldownsRepo = new DatabasePlayerCooldownsRepository(plugin, configRepo);
+        } else {
+            playerCooldownsRepo = new LocalPlayerCooldownsRepository(plugin);
+        }
         cooldownsRepo = new CooldownsRepository(plugin);
         messageRepo = new MessageRepository(plugin);
         savedCooldownsRepo = new SavedCooldownsRepository(plugin);
@@ -58,6 +61,10 @@ public class Bootstrapper {
 
     public IConfigRepository getConfigRepo() {
         return configRepo;
+    }
+
+    public IPlayerCooldownsRepository getPlayerCooldownsRepo() {
+        return playerCooldownsRepo;
     }
 
     public ICooldownsRepository getCooldownsRepo() {

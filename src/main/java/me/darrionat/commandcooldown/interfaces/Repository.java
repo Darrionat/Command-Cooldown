@@ -8,6 +8,7 @@ public interface Repository {
     String MESSAGES = "messages.yml";
     String COOLDOWNS = "cooldowns.yml";
     String SAVED_COOLDOWNS = "savedCooldowns.yml";
+    String PLAYER_DATA_DIR = "playerData";
 
     void init();
 }

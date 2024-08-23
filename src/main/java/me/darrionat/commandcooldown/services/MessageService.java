@@ -18,12 +18,19 @@ import java.util.Objects;
 public class MessageService implements IMessageService {
     private static final String ERRORS = "errors.";
     private static final String COMMANDS = "commands.";
+    private static final String ACTIVE_COOLDOWNS = "activeCooldowns.";
     private final CommandCooldownPlugin plugin;
     private final IMessageRepository messageRepo;
 
     public MessageService(CommandCooldownPlugin plugin, IMessageRepository messageRepo) {
         this.plugin = plugin;
         this.messageRepo = messageRepo;
+    }
+
+    @Override
+    public void sendMessage(CommandSender sender, String message) {
+        Objects.requireNonNull(message);
+        sender.sendMessage(Utils.toColor(message));
     }
 
     @Override
@@ -101,8 +108,36 @@ public class MessageService implements IMessageService {
     }
 
     @Override
-    public void sendMessage(CommandSender sender, String message) {
-        Objects.requireNonNull(message);
-        sender.sendMessage(Utils.toColor(message));
+    public void sendUseOnlinePlayerOrUUIDMessage(CommandSender sender) {
+        String msg = messageRepo.getMessage(ERRORS + "useOnlinePlayerOrUUID");
+        sendMessage(sender, msg);
+    }
+
+    @Override
+    public void sendNoActiveCooldownsMessage(CommandSender sender, String playerOrUUID) {
+        String msg = messageRepo.getMessage(ACTIVE_COOLDOWNS + "noActiveCooldowns");
+        msg = msg.replace("%player%", playerOrUUID);
+        sendMessage(sender, msg);
+    }
+
+    @Override
+    public void sendActiveCooldownsHeader(CommandSender sender, String playerOrUUID) {
+        String msg = messageRepo.getMessage(ACTIVE_COOLDOWNS + "header");
+        msg = msg.replace("%player%", playerOrUUID);
+        sendMessage(sender, msg);
+    }
+
+    @Override
+    public void sendCommandWithActiveCooldownMessage(CommandSender sender, String commandString) {
+        String msg = messageRepo.getMessage(ACTIVE_COOLDOWNS + "commandWithActiveCooldown");
+        msg = msg.replace("%command%", commandString);
+        sendMessage(sender, msg);
+    }
+
+    @Override
+    public void sendRemainingTimeOnActiveCooldownMessage(CommandSender sender, String durationString) {
+        String msg = messageRepo.getMessage(ACTIVE_COOLDOWNS + "remainingTime");
+        msg = msg.replace("%command%", durationString);
+        sendMessage(sender, msg);
     }
 }

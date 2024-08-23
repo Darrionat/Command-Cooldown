@@ -43,4 +43,14 @@ public interface IMessageService extends Service {
     void sendResetMessage(CommandSender sender, Player target);
 
     void sendMessage(CommandSender sender, String message);
+
+    void sendUseOnlinePlayerOrUUIDMessage(CommandSender sender);
+
+    void sendNoActiveCooldownsMessage(CommandSender sender, String playerOrUUID);
+
+    void sendActiveCooldownsHeader(CommandSender sender, String playerOrUUID);
+
+    void sendCommandWithActiveCooldownMessage(CommandSender sender, String commandString);
+
+    void sendRemainingTimeOnActiveCooldownMessage(CommandSender sender, String durationString);
 }
