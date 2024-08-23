@@ -3,12 +3,12 @@ package me.darrionat.commandcooldown.utils;
 import java.util.HashMap;
 
 public class Duration {
-    private static final String SECOND = "s";
-    private static final String MINUTE = "m";
-    private static final String HOUR = "h";
-    private static final String DAY = "d";
-    private static final String WEEK = "w";
-    private static final String YEAR = "y";
+    public static final String SECOND = "s";
+    public static final String MINUTE = "m";
+    public static final String HOUR = "h";
+    public static final String DAY = "d";
+    public static final String WEEK = "w";
+    public static final String YEAR = "y";
     private static final HashMap<String, Double> DURATION_TO_SECONDS = new HashMap<>();
 
     static {
