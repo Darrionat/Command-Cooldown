@@ -6,7 +6,7 @@
 
     <groupId>me.darrionat</groupId>
     <artifactId>CommandCooldown</artifactId>
-    <version>3.0</version>
+    <version>3.0.1</version>
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>me.darrionat</groupId>
             <artifactId>core</artifactId>
-            <version>1.8.3.1</version>
+            <version>1.8.4</version>
         </dependency>
         <dependency>
             <groupId>net.wesjd</groupId>
