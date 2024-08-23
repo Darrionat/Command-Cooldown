@@ -107,8 +107,7 @@ public class CooldownService implements ICooldownService {
     private static double getLowestDuration(Player p, String commandPerm) {
         double lowestDuration = -1;
         for (PermissionAttachmentInfo pai : p.getEffectivePermissions()) {
-//          if (!pai.getValue()) continue; // Ignores permissions with value false // TODO
-
+            if (!pai.getValue()) continue; // Ignores permissions with value false
             String permission = pai.getPermission();
             if (!permission.contains("commandcooldown." + commandPerm)) continue;
             // Only the duration
