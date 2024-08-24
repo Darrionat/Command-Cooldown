@@ -1,8 +1,8 @@
-name: CommandCooldown
+name: ${project.name}
 main: me.darrionat.commandcooldown.CommandCooldownPlugin
-description: An easy way to add cooldowns to commands
-version: 3.0.1
-api-version: 1.16
+description: ${project.description}
+version: ${project.version}
+api-version: ${project.minecraft.api.version}
 
 commands:
   commandcooldown:

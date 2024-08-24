@@ -41,7 +41,7 @@ public class RemoveCooldownsCommand extends SubCommand {
     protected void runCommand(CommandSender sender, String[] args) {
         Player target = Bukkit.getPlayer(args[1]);
         if (target == null)
-            return;
+            return; // TODO Print error message to player
         playerCooldownsRepository.removePlayerCooldowns(target);
         messageService.sendResetMessage(sender, target);
     }

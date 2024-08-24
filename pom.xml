@@ -6,7 +6,7 @@
 
     <groupId>me.darrionat</groupId>
     <artifactId>CommandCooldown</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>me.darrionat</groupId>
             <artifactId>core</artifactId>
-            <version>1.8.4</version>
+            <version>1.8.6</version>
         </dependency>
         <dependency>
             <groupId>net.wesjd</groupId>
@@ -50,7 +50,23 @@
         </pluginRepository>
     </pluginRepositories>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version> <!-- Use an appropriate version -->
+                <configuration>
+                    <delimiters>
+                        <delimiter>${*}</delimiter>
+                    </delimiters>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -78,5 +94,7 @@
         <java.version>1.16</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <project.minecraft.api.version>1.21</project.minecraft.api.version>
+        <project.description>An easy way to add cooldowns to commands</project.description>
     </properties>
 </project>

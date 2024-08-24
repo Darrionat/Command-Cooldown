@@ -72,7 +72,7 @@ public class CommandCooldownPlugin extends Plugin {
     }
 
     private void checkUpdates() {
-        this.updater = buildUpdateChecker(RESOURCE_ID);
+        this.updater = buildUpdateChecker();
         if (updater.updateAvailable()) {
             this.updateAvailable = true;
             log("Update available! Download at " + updater.getResourceURL());
@@ -170,5 +170,10 @@ public class CommandCooldownPlugin extends Plugin {
                 return playerCooldown;
         }
         return null;
+    }
+
+    @Override
+    public int getSpigotResourceId() {
+        return RESOURCE_ID;
     }
 }

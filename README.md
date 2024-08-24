@@ -19,8 +19,7 @@ Database connections can be enabled and configured in the `config.yml` file.
 
 ### Dependencies
 
-This project uses the library PluginLib. PluginLib was also created by Darrionat and is licensed under MIT. The
-PluginLib project can be found [here][PluginLib].
+This project uses the library [PluginLib][PluginLib]. PluginLib was also created by Darrionat and is licensed under MIT.
 
 <!-- Links -->
 
