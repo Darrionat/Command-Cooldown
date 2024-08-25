@@ -26,6 +26,7 @@ import java.util.UUID;
 
 public class CommandCooldownPlugin extends Plugin {
     private static final int RESOURCE_ID = 73696;
+    private static final int BSTATS_ID = 6109;
     private SpigotMCUpdateHandler updater;
     private boolean updateAvailable;
 
@@ -49,6 +50,7 @@ public class CommandCooldownPlugin extends Plugin {
         new PlayerCommandPreprocess(this, configRepo, playerCooldownsRepo, cooldownService, bypassService, messageService);
         new PlayerJoin(this, configRepo);
         new ChatPromptListener(this);
+        enableMetrics();
     }
 
     private void initFields() {
@@ -177,6 +179,11 @@ public class CommandCooldownPlugin extends Plugin {
     @Override
     public int getSpigotResourceId() {
         return RESOURCE_ID;
+    }
+
+    @Override
+    public int getbStatsResourceId() {
+        return BSTATS_ID;
     }
 
     public List<String> getAllOnlinePlayerNames() {
