@@ -12,8 +12,7 @@ public class ConfigRepository implements IConfigRepository {
 
     public ConfigRepository(CommandCooldownPlugin plugin) {
         ConfigBuilder builder = new ConfigBuilder(plugin, CONFIG);
-        builder.useBuiltInFile();
-        builder.updateConfig();
+        builder.useBuiltInFile().updateConfig();
         config = builder.build();
         init();
     }

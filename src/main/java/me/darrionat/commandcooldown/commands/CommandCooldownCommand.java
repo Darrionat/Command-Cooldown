@@ -2,7 +2,9 @@ package me.darrionat.commandcooldown.commands;
 
 import me.darrionat.commandcooldown.CommandCooldownPlugin;
 import me.darrionat.commandcooldown.commands.subcommands.*;
-import me.darrionat.commandcooldown.interfaces.*;
+import me.darrionat.commandcooldown.interfaces.IBypassService;
+import me.darrionat.commandcooldown.interfaces.IMessageService;
+import me.darrionat.commandcooldown.interfaces.IPlayerCooldownsRepository;
 import me.darrionat.pluginlib.commands.BaseCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

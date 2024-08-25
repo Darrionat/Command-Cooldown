@@ -7,6 +7,7 @@ import me.darrionat.pluginlib.commands.SubCommand;
 import me.darrionat.pluginlib.utils.Utils;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HelpCommand extends SubCommand {
@@ -40,10 +41,24 @@ public class HelpCommand extends SubCommand {
             sendHelpMessage(sender, args[1]);
     }
 
+    @Override
+    public List<String> getTabComplete(String[] args) {
+        if (args.length != 2) {
+            return null;
+        }
+        List<String> toReturn = new ArrayList<>();
+        List<String> helpMessages = messageService.getHelpMessages();
+
+        for (int i = 1; i <= pageAmount(helpMessages); i++) {
+            toReturn.add("" + i);
+        }
+        return toReturn;
+    }
+
     private void sendHelpMessage(CommandSender sender, String pageInput) {
         int page;
-        List<String> list = messageService.getHelpMessages();
-        int pagesAmount = (int) Math.ceil((double) list.size() / 5.0);
+        List<String> helpMessages = messageService.getHelpMessages();
+        int pagesAmount = pageAmount(helpMessages);
         try {
             page = Integer.parseInt(pageInput);
         } catch (NumberFormatException e) {
@@ -51,7 +66,11 @@ public class HelpCommand extends SubCommand {
         }
         if (page > pagesAmount || page < 1) page = 1;
         messageService.sendHelpHeader(sender, page, pagesAmount);
-        for (int i = page * 5 - 5; i <= (page * 5 - 1) && i < list.size(); i++)
-            sender.sendMessage(Utils.toColor(" " + list.get(i)));
+        for (int i = page * 5 - 5; i <= (page * 5 - 1) && i < helpMessages.size(); i++)
+            sender.sendMessage(Utils.toColor(" " + helpMessages.get(i)));
+    }
+
+    private int pageAmount(List<String> helpMessages) {
+        return (int) Math.ceil((double) helpMessages.size() / 5.0);
     }
 }

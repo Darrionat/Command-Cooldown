@@ -6,6 +6,8 @@ import me.darrionat.commandcooldown.interfaces.IMessageService;
 import me.darrionat.pluginlib.commands.SubCommand;
 import org.bukkit.command.CommandSender;
 
+import java.util.List;
+
 public class ReloadCommand extends SubCommand {
     private final CommandCooldownPlugin plugin;
     private final IMessageService messageService;
@@ -35,5 +37,10 @@ public class ReloadCommand extends SubCommand {
     protected void runCommand(CommandSender sender, String[] args) {
         messageService.sendReloadMessage(sender);
         plugin.reinitializeRepositories();
+    }
+
+    @Override
+    public List<String> getTabComplete(String[] args) {
+        return null;
     }
 }

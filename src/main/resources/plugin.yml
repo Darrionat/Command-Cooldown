@@ -1,4 +1,5 @@
 name: ${project.name}
+author: ${project.author}
 main: me.darrionat.commandcooldown.CommandCooldownPlugin
 description: ${project.description}
 version: ${project.version}

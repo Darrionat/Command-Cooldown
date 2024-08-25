@@ -1,6 +1,5 @@
 package me.darrionat.commandcooldown.commands.subcommands;
 
-
 import me.darrionat.commandcooldown.CommandCooldownPlugin;
 import me.darrionat.commandcooldown.commands.CommandCooldownCommand;
 import me.darrionat.commandcooldown.cooldowns.Cooldown;
@@ -76,6 +75,14 @@ public class ActiveCooldownsCommand extends SubCommand {
         }
         // Optional player/UUID
         sendActiveCooldownsOfSecondaryPlayer(sender, args[1]);
+    }
+
+    @Override
+    public List<String> getTabComplete(String[] args) {
+        if (args.length != 2) {
+            return null;
+        }
+        return plugin.getAllOnlinePlayerNames();
     }
 
     private void sendActiveCooldownsOfSecondaryPlayer(CommandSender sender, String arg) {

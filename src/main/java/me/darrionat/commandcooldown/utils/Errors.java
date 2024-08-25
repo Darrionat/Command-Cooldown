@@ -2,11 +2,10 @@ package me.darrionat.commandcooldown.utils;
 
 import me.darrionat.commandcooldown.CommandCooldownPlugin;
 import me.darrionat.commandcooldown.interfaces.IMessageService;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
 import me.darrionat.pluginlib.ErrorHandler;
 import me.darrionat.pluginlib.commands.SubCommand;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 

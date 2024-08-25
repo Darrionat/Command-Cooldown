@@ -79,7 +79,6 @@ public class PlayerCooldown {
         return builder.toString();
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof PlayerCooldown)) return false;

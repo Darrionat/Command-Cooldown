@@ -12,7 +12,6 @@ public interface ICooldownService extends Service {
      */
     Cooldown findApplicableCooldown(String s);
 
-
     /**
      * Checks a player's permissions to see if they have a permission that affects the cooldown's duration.
      *

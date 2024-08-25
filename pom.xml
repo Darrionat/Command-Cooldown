@@ -6,7 +6,7 @@
 
     <groupId>me.darrionat</groupId>
     <artifactId>CommandCooldown</artifactId>
-    <version>3.0.2</version>
+    <version>3.0.3</version>
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>me.darrionat</groupId>
             <artifactId>core</artifactId>
-            <version>1.8.6</version>
+            <version>1.9</version>
         </dependency>
         <dependency>
             <groupId>net.wesjd</groupId>
@@ -96,5 +96,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.minecraft.api.version>1.21</project.minecraft.api.version>
         <project.description>An easy way to add cooldowns to commands</project.description>
+        <project.author>Darrionat</project.author>
     </properties>
 </project>

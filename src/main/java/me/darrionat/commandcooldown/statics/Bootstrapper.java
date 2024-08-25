@@ -17,7 +17,6 @@ public class Bootstrapper {
     private IConfigRepository configRepo;
     private ICooldownsRepository cooldownsRepo;
     private IMessageRepository messageRepo;
-    private ISavedCooldownsRepository savedCooldownsRepo;
     private IPlayerCooldownsRepository playerCooldownsRepo;
 
     private IBypassService bypassService;
@@ -42,16 +41,14 @@ public class Bootstrapper {
         }
         cooldownsRepo = new CooldownsRepository(plugin);
         messageRepo = new MessageRepository(plugin);
-        savedCooldownsRepo = new SavedCooldownsRepository(plugin);
 
         repositories.add(configRepo);
         repositories.add(cooldownsRepo);
         repositories.add(messageRepo);
-        repositories.add(savedCooldownsRepo);
 
         bypassService = new BypassService();
         commandService = new CommandService(cooldownsRepo);
-        cooldownService = new CooldownService(cooldownsRepo, savedCooldownsRepo);
+        cooldownService = new CooldownService(cooldownsRepo);
         messageService = new MessageService(plugin, messageRepo);
     }
 
@@ -73,10 +70,6 @@ public class Bootstrapper {
 
     public IMessageRepository getMessageRepo() {
         return messageRepo;
-    }
-
-    public ISavedCooldownsRepository getSavedCooldownsRepo() {
-        return savedCooldownsRepo;
     }
 
     public IBypassService getBypassService() {

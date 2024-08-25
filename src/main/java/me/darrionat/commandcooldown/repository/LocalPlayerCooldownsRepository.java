@@ -26,7 +26,6 @@ public class LocalPlayerCooldownsRepository implements IPlayerCooldownsRepositor
         init();
     }
 
-
     public void init() {
         playerConfigMap.clear();
     }
@@ -47,7 +46,6 @@ public class LocalPlayerCooldownsRepository implements IPlayerCooldownsRepositor
         }
         return playerConfigMap.get(uuid);
     }
-
 
     /**
      * Updates the player data to not contain expired cooldowns
@@ -139,7 +137,6 @@ public class LocalPlayerCooldownsRepository implements IPlayerCooldownsRepositor
     public List<PlayerCooldown> getAllPlayerCooldownsForPlayer(Player p) {
         return getAllPlayerCooldownsForPlayer(p.getUniqueId());
     }
-
 
     @Override
     public List<PlayerCooldown> getAllPlayerCooldownsForPlayer(UUID uuid) {

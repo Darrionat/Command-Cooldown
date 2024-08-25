@@ -4,11 +4,12 @@ import me.darrionat.commandcooldown.cooldowns.Cooldown;
 import me.darrionat.commandcooldown.cooldowns.SavedCommand;
 import me.darrionat.commandcooldown.interfaces.ICooldownService;
 import me.darrionat.commandcooldown.interfaces.ICooldownsRepository;
-import me.darrionat.commandcooldown.interfaces.ISavedCooldownsRepository;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CooldownService implements ICooldownService {
     private final ICooldownsRepository cooldownsRepo;
@@ -19,10 +20,9 @@ public class CooldownService implements ICooldownService {
      * The key is the player's UUID and the value is the time that the cooldown expires.
      */
 
-    public CooldownService(ICooldownsRepository cooldownsRepo, ISavedCooldownsRepository savedCooldownsRepo) {
+    public CooldownService(ICooldownsRepository cooldownsRepo) {
         this.cooldownsRepo = cooldownsRepo;
     }
-
 
     @Override
     public Cooldown findApplicableCooldown(String s) {
@@ -84,7 +84,6 @@ public class CooldownService implements ICooldownService {
         }
         return mostMatching;
     }
-
 
     @Override
     public Cooldown permissionCooldownChange(Player p, Cooldown cooldown) {

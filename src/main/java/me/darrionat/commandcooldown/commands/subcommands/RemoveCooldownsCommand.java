@@ -9,6 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class RemoveCooldownsCommand extends SubCommand {
     private final CommandCooldownPlugin plugin;
     private final IMessageService messageService;
@@ -44,5 +46,13 @@ public class RemoveCooldownsCommand extends SubCommand {
             return; // TODO Print error message to player
         playerCooldownsRepository.removePlayerCooldowns(target);
         messageService.sendResetMessage(sender, target);
+    }
+
+    @Override
+    public List<String> getTabComplete(String[] args) {
+        if (args.length != 2) {
+            return null;
+        }
+        return plugin.getAllOnlinePlayerNames();
     }
 }

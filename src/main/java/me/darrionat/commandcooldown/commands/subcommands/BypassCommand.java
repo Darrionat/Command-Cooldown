@@ -8,6 +8,8 @@ import me.darrionat.pluginlib.commands.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class BypassCommand extends SubCommand {
     private final IBypassService bypassService;
     private final IMessageService messageService;
@@ -43,5 +45,10 @@ public class BypassCommand extends SubCommand {
             bypassService.startBypassing(p);
             messageService.sendBypassMessage(p);
         }
+    }
+
+    @Override
+    public List<String> getTabComplete(String[] args) {
+        return null;
     }
 }

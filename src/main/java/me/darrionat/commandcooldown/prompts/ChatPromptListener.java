@@ -47,7 +47,7 @@ public class ChatPromptListener implements Listener {
      *
      * @param p The player to get the task of.
      * @return The active task the player is involved in. If the player does not have an active task {@code null} will
-     *         be returned.
+     * be returned.
      */
     private Task getPlayerTask(Player p) {
         for (Task task : ACTIVE_TASKS)

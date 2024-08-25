@@ -17,8 +17,10 @@ import me.darrionat.commandcooldown.utils.Errors;
 import me.darrionat.pluginlib.Plugin;
 import me.darrionat.pluginlib.guis.Gui;
 import me.darrionat.pluginlib.utils.SpigotMCUpdateHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -175,5 +177,13 @@ public class CommandCooldownPlugin extends Plugin {
     @Override
     public int getSpigotResourceId() {
         return RESOURCE_ID;
+    }
+
+    public List<String> getAllOnlinePlayerNames() {
+        List<String> onlinePlayers = new ArrayList<>();
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            onlinePlayers.add(p.getName());
+        }
+        return onlinePlayers;
     }
 }

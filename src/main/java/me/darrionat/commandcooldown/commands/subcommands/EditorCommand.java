@@ -6,6 +6,8 @@ import me.darrionat.pluginlib.commands.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class EditorCommand extends SubCommand {
     private final CommandCooldownPlugin plugin;
 
@@ -32,5 +34,10 @@ public class EditorCommand extends SubCommand {
     @Override
     protected void runCommand(CommandSender sender, String[] args) {
         plugin.openCooldownsEditor((Player) sender, 1);
+    }
+
+    @Override
+    public List<String> getTabComplete(String[] args) {
+        return null;
     }
 }

@@ -16,8 +16,7 @@ public class MessageRepository implements IMessageRepository {
 
     public MessageRepository(CommandCooldownPlugin plugin) {
         ConfigBuilder builder = new ConfigBuilder(plugin, MESSAGES);
-        builder.useBuiltInFile();
-        builder.updateConfig();
+        builder.useBuiltInFile().updateConfig();
         config = builder.build();
         init();
     }
