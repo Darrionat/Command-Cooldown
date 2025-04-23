@@ -59,6 +59,7 @@ public class SavedCommand extends Command implements Cooldownable {
         return cooldowns;
     }
 
+
     /**
      * Adds a new set of arguments and cooldown to the defined list of cooldowns.
      */
@@ -76,4 +77,5 @@ public class SavedCommand extends Command implements Cooldownable {
     public void removeCooldown(Cooldown cooldown) {
         cooldowns.remove(cooldown);
     }
+
 }

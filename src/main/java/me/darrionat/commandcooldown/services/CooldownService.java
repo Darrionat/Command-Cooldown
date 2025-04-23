@@ -57,6 +57,10 @@ public class CooldownService implements ICooldownService {
         Cooldown mostMatching = null;
         int mostMatchingAmt = 0;
 
+        if (args.isEmpty()) {
+            return savedCommand.getBaseCooldown();
+        }
+
         for (Cooldown cooldown : savedCommand.getCooldowns()) {
             if (cooldown.isBaseCooldown()) continue;
             // Track if matched and the amount of matched arguments

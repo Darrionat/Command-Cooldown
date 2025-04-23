@@ -39,7 +39,6 @@ public class CooldownsRepository implements ICooldownsRepository {
 
     public SavedCommand getSavedCommand(String label) {
         SavedCommand command = new SavedCommand(label.toLowerCase());
-
         ConfigurationSection section = file.getConfigurationSection(label.toLowerCase());
         for (String args : section.getConfigurationSection("cooldowns").getKeys(false)) {
             double duration;

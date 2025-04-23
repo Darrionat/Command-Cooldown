@@ -40,7 +40,8 @@ public class CooldownsGui extends AnimatedGui {
         int pageDiff = (page - 1) * AMT_PER_PAGE;
         for (int i = 0; i < AMT_PER_PAGE && i + pageDiff < commands.size(); i++) {
             SavedCommand command = commands.get(i + pageDiff);
-            createItem(XMaterial.CHEST, 1, i, "&f&l/" + command.getLabel(), "&7Left-Click to edit this command");
+            createItem(XMaterial.CHEST, 1, i, "&f&l/" + command.getLabel(),
+                    "&7Left-Click to edit this command", "&7Right-Click to &cdelete &7cooldown on this command");
         }
 
         createItem(CREATE, 1, CREATE_SLOT, "&aCreate Command Cooldown",
@@ -65,15 +66,17 @@ public class CooldownsGui extends AnimatedGui {
             switchPage(p, slot);
             return;
         }
-        if (clickedItem.getType() == PAGE_SWITCH.parseMaterial()) {
-            switchPage(p, slot);
-            return;
-        }
         List<SavedCommand> commands = plugin.getCommandCooldowns();
         if (slot >= commands.size()) return;
         SavedCommand command = commands.get(slot);
-        if (command != null)
-            plugin.openCommandEditor(p, command, 1);
+        if (command != null) {
+            if (clickType == ClickType.LEFT) {
+                plugin.openCommandEditor(p, command, 1);
+            } else if (clickType == ClickType.RIGHT) {
+                plugin.removeCommandCooldown(command);
+                plugin.openCooldownsEditor(p, 1);
+            }
+        }
     }
 
     private void fillerItem() {

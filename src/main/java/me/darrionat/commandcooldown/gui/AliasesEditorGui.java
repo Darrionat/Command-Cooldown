@@ -20,7 +20,7 @@ public class AliasesEditorGui extends Gui {
     private final ICommandService commandService;
 
     public AliasesEditorGui(CommandCooldownPlugin plugin, SavedCommand command, int page) {
-        super(plugin, "/" + command.getLabel() + " Aliases", 6);
+        super(plugin, "Alternate labels for /" + command.getLabel(), 6);
         this.plugin = plugin;
         this.command = command;
         this.page = page;

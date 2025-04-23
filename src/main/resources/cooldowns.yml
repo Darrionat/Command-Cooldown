@@ -1,7 +1,10 @@
 warp:
   cooldowns:
+    # Cooldown on /warp [any]
     '*': 30m
+    # Cooldown on /warp shop
     'shop': 15m
+    # Cooldown on /warp vip
     'vip': 30s
   aliases:
     - 'ewarp'

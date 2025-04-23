@@ -20,6 +20,7 @@ import me.darrionat.pluginlib.utils.SpigotMCUpdateHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -79,7 +80,13 @@ public class CommandCooldownPlugin extends Plugin {
         this.updater = buildUpdateChecker();
         if (updater.updateAvailable()) {
             this.updateAvailable = true;
-            log("Update available! Download at " + updater.getResourceURL());
+            try {
+                log("Update available! Current version: " + getDescription().getVersion() + ", New version: " + updater.getLatestVersion());
+            } catch (IOException ex) {
+                log("Update available! Current version: " + getDescription().getVersion());
+            }
+            log("Download the newest version here: " + updater.getResourceURL());
+            log("If you just updated, you can ignore this message (SpigotMC takes time to update).");
         } else {
             log("Plugin up to date");
         }
@@ -192,5 +199,9 @@ public class CommandCooldownPlugin extends Plugin {
             onlinePlayers.add(p.getName());
         }
         return onlinePlayers;
+    }
+
+    public void removeCommandCooldown(SavedCommand command) {
+        cooldownsRepo.removeCommandCooldown(command);
     }
 }
