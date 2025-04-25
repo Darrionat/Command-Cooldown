@@ -137,7 +137,7 @@ public class MessageService implements IMessageService {
     @Override
     public void sendRemainingTimeOnActiveCooldownMessage(CommandSender sender, String durationString) {
         String msg = messageRepo.getMessage(ACTIVE_COOLDOWNS + "remainingTime");
-        msg = msg.replace("%command%", durationString);
+        msg = msg.replace("%time%", durationString);
         sendMessage(sender, msg);
     }
 }
